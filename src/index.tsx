@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import Counter from "./components/Counter";
+// import Counter from "./components/Counter";
+import MainContainer from "./containers/MainContainer";
 
-ReactDOM.render(<Counter name="React" />, document.getElementById("app"));
+ReactDOM.render(<MainContainer />, document.getElementById("app"));
