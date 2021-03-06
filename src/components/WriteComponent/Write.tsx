@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 
-type MyFormProps = {
-  onSubmit: (form: { title: string; description: string }) => void;
+type FormProps = {
+  onSubmit: (form: { title: string; description: string; flag:boolean }) => void;
 };
 interface WriteProps {
     title : string;
@@ -10,20 +10,23 @@ interface WriteProps {
     flag:boolean;
 }
 
-
-const Write:React.FC<MyFormProps> = ({ onSubmit }:MyFormProps) => {
-    const [form, setItem] = React.useState<WriteProps>({title:'',description:'',flag:false})
+const Write:React.FC<FormProps> = ({ onSubmit }:FormProps) => {
+    const [form, setForm] = React.useState<WriteProps>({
+        title: '',
+        description: '',
+        flag: false
+    })
 
     const onChange =(event:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         const {name, value} = event.target
-        setItem({
+        setForm({
             ...form,
             [name]:value
         })
     }
     const onChangeCheckBox =(event:React.ChangeEvent<HTMLInputElement>) => {
         const {name, checked} = event.target
-        setItem({
+        setForm({
             ...form,
             [name]:checked
         })
@@ -31,8 +34,12 @@ const Write:React.FC<MyFormProps> = ({ onSubmit }:MyFormProps) => {
 
     const submit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(e.target)
         onSubmit(form)
+        setForm({
+            title:'',
+            description:'',
+            flag:false,
+        })
     }
 
     return (    

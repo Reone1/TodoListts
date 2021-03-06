@@ -1,18 +1,11 @@
 import * as React from 'react';
+import Item from '../ItemComponent/Item'
 
-interface ListProps {
-    title: string;
-    description: string;
-    order: any;
-}
 
-const List: React.FC<ListProps> = ({title, description}:ListProps) => {
-    let submit:any = () => {
-
-    }
+const List: React.FC = () => {
     return(
-        <div onClick={submit}>
-            it's List
+        <div>
+            <Item title="title" description="discription" flag={false}/>
         </div>
     )
 }
