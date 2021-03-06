@@ -1,14 +1,25 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 
 interface ItemProps {
     title : string;
     description: string;
+    flag: boolean;
 }
 
-const Item:React.FC<ItemProps> = ({title, description}:ItemProps) => {
+const Item:React.FC<ItemProps> = ({title, description, flag}:ItemProps) => {
+    const [flagState, setFlagState] = useState<boolean>(flag)
+
+    useEffect(() => {
+       console.log('flagChange', flagState) 
+    },[flagState])
+
     return (    
-        <React.Fragment>
-            it's item;
-        </React.Fragment>
+        <div>
+        <button onClick={() => setFlagState(!flagState)}>플래그 버튼</button>
+          <h2>{title}</h2>  
+          <div>{description}</div>
+        </div>
     )
 }
+
+export default Item;
