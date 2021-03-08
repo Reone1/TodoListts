@@ -9,6 +9,7 @@ const Container = styled.div`
   height:60%;
   display:inline-block;
 `
+
 const MainContainer: React.FC = () => {
   const onSubmit = (form:{title:string,description:string}) => {
     console.log(form)

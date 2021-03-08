@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import styled from 'styled-components';
 
 type FormProps = {
   onSubmit: (form: { title: string; description: string; flag:boolean }) => void;
@@ -9,6 +9,15 @@ interface WriteProps {
     description: string;
     flag:boolean;
 }
+
+const InputForm = styled.form`
+    border: 1px solid black;
+    height: 70%;
+
+    input {
+        display:block;
+    }
+`
 
 const Write:React.FC<FormProps> = ({ onSubmit }:FormProps) => {
     const [form, setForm] = React.useState<WriteProps>({
@@ -43,12 +52,12 @@ const Write:React.FC<FormProps> = ({ onSubmit }:FormProps) => {
     }
 
     return (    
-        <form onSubmit={submit}>
+        <InputForm onSubmit={submit}>
             <input name="title" value={form.title} onChange={onChange}/>
             <textarea name="description" value={form.description} onChange={onChange} ></textarea>
             <input type="checkbox" name="flag" checked={form.flag} onChange={onChangeCheckBox}/>
             <button name="submit">등록</button>
-        </form>
+        </InputForm>
     )
 }
 
