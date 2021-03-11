@@ -1,13 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-type Submit = ( 
-    form: { 
-        title: string; 
-        description: string; 
-        flag:boolean 
-    }
-) => void;
+type FormProps = {
+  onSubmit: (form: { title: string; description: string; flag:boolean }) => void;
+};
 interface WriteProps {
     title : string;
     description: string;
@@ -15,7 +11,7 @@ interface WriteProps {
 }
 
 const InputForm = styled.form`
-    border: 1px solid black;np
+    border: 1px solid black;
     height: 70%;
     margin:0 auto;
     width: 80%;
@@ -38,8 +34,7 @@ const InputForm = styled.form`
     }
 `
 
-const Write:React.FC<Submit> = (sub:Submit) => {
-    
+const Write:React.FC<FormProps> = ({ onSubmit }:FormProps) => {
     const [form, setForm] = React.useState<WriteProps>({
         title: '',
         description: '',
@@ -53,7 +48,7 @@ const Write:React.FC<Submit> = (sub:Submit) => {
             [name]:value
         })
     }
-
+    
     const onChangeCheckBox =(event:React.ChangeEvent<HTMLInputElement>) => {
         const {name, checked} = event.target
         setForm({
@@ -71,7 +66,7 @@ const Write:React.FC<Submit> = (sub:Submit) => {
         if (title === '' || description === '') {
             return console.error('no input') // error 처리
         }
-        sub(form)
+        onSubmit(form)
         setForm({
             title:'',
             description:'',
