@@ -7,7 +7,6 @@ import styled from 'styled-components';
 const Container = styled.div`
   margin: 0 auto;
   height:60%;
-  display:inline-block;
 `
 
 const MainContainer: React.FC = () => {

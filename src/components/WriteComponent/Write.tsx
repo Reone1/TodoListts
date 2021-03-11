@@ -1,9 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-type FormProps = {
-  onSubmit: (form: { title: string; description: string; flag:boolean }) => void;
-};
+type Submit = ( 
+    form: { 
+        title: string; 
+        description: string; 
+        flag:boolean 
+    }
+) => void;
 interface WriteProps {
     title : string;
     description: string;
@@ -11,15 +15,31 @@ interface WriteProps {
 }
 
 const InputForm = styled.form`
-    border: 1px solid black;
+    border: 1px solid black;np
     height: 70%;
-
+    margin:0 auto;
+    width: 80%;
     input {
+        width:100%;
         display:block;
+        border:none;
+        border-bottom: 1px solid black;
+    }
+    textarea {
+        width: 100%;
+        display:block;
+        border:none;
+        border-bottom: 1px solid black;
+    }
+    button {
+        border :none;
+        background-color: rgba(0,0,0,0);
+        width: 100%;
     }
 `
 
-const Write:React.FC<FormProps> = ({ onSubmit }:FormProps) => {
+const Write:React.FC<Submit> = (sub:Submit) => {
+    
     const [form, setForm] = React.useState<WriteProps>({
         title: '',
         description: '',
@@ -33,6 +53,7 @@ const Write:React.FC<FormProps> = ({ onSubmit }:FormProps) => {
             [name]:value
         })
     }
+
     const onChangeCheckBox =(event:React.ChangeEvent<HTMLInputElement>) => {
         const {name, checked} = event.target
         setForm({
@@ -43,7 +64,14 @@ const Write:React.FC<FormProps> = ({ onSubmit }:FormProps) => {
 
     const submit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        onSubmit(form)
+        const {
+            title,
+            description
+        } = form
+        if (title === '' || description === '') {
+            return console.error('no input') // error 처리
+        }
+        sub(form)
         setForm({
             title:'',
             description:'',
