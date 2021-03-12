@@ -1,11 +1,16 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { createStore } from 'redux'
-import todoApp from '../reducers/TodoList'
+import { Provider } from 'react-redux'
+import todoApp from '../reducers/todoList'
 
 let store = createStore(todoApp)
 // TODO: storage connection
 // import Counter from "./components/Counter";
 import MainContainer from "./containers/MainContainer";
 
-ReactDOM.render(<MainContainer />, document.getElementById("app"));
+ReactDOM.render(
+    <Provider store={store}>
+        <MainContainer />
+    </Provider>
+    , document.getElementById("app"));
