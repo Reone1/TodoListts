@@ -1,5 +1,11 @@
 import { ADD_TODO } from './actionType'
 
-export const addTodo = (text:string) => {
-  return { type: ADD_TODO, text }
+type WriteProps = {
+    title : string;
+    description: string;
+    flag:boolean;
+}
+
+export const addTodo = (todo:WriteProps) => {
+  return { type: ADD_TODO, todo}
 }

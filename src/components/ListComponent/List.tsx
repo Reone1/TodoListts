@@ -1,21 +1,14 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
+import {RootState} from '../../../reducers/todoList'
 import Item from '../ItemComponent/Item'
 
-type listItem = {
-	listItems: Array<item>
-}
-
-type item = {
-	title: string;
-	description: string;
-	flag: boolean;
-}
-
-const List: React.FC<listItem> = ({listItems}:listItem) => {
+const List: React.FC = () => {
+	let items = useSelector((todos:RootState) => todos.todos)
     return(
-        <div>
-         {listItems.map(item => <Item title={item.title} description={item.description} flag={item.flag}/>)}
-        </div>
+			<div>
+				{items.map((item,i) => <Item key={i} {...item}/>)}
+			</div>
     )
 }
 

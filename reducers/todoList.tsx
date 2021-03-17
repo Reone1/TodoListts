@@ -1,35 +1,29 @@
 import { ADD_TODO } from "./actionType"
 import { combineReducers } from 'redux'
 
-type listItem = {
-	listItems: Array<item>
-}
+export type listItem = Array<item>
 
-type item = {
+export type item = {
 	title: string;
 	description: string;
 	flag: boolean;
 }
 
-const initialstate:listItem = {
-	listItems:[{
+const initialstate:listItem = [
+	{
 		title: 'no.1 TodoList',
 		description:"it's a test description to do list item",
 		flag: true,
-	}],
-}
+	},
+]
 
 function todos(state = initialstate, action:any) {
 	switch (action.type) {
 		case ADD_TODO:
 			return [
-				...state.listItems,
-				{
-					title: action.title,
-					description: action.description,
-					flag: action.flag,
-				}
-			]
+					...state,
+					action.todo
+				]
 		default:
 			return state;
 	}
@@ -40,3 +34,4 @@ const todoApp = combineReducers({
 });
 
 export default todoApp
+export type RootState = ReturnType<typeof todoApp>;

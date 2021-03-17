@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {connect, useDispatch} from 'react-redux';
 import List from '../components/ListComponent/List'
 import Write from '../components/WriteComponent/Write'
 

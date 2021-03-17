@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { connect, useDispatch } from 'react-redux'
 import styled from 'styled-components';
+import { addTodo } from '../../../reducers/reducer';
 
 type FormProps = {
   onSubmit: (form: { title: string; description: string; flag:boolean }) => void;
 };
-interface WriteProps {
+type WriteProps = {
     title : string;
     description: string;
     flag:boolean;
@@ -40,6 +42,7 @@ const Write:React.FC<FormProps> = ({ onSubmit }:FormProps) => {
         description: '',
         flag: false
     })
+    const dispatch = useDispatch()
 
     const onChange =(event:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         const {name, value} = event.target
@@ -66,6 +69,7 @@ const Write:React.FC<FormProps> = ({ onSubmit }:FormProps) => {
         if (title === '' || description === '') {
             return console.error('no input') // error 처리
         }
+        dispatch(addTodo(form))
         onSubmit(form)
         setForm({
             title:'',
